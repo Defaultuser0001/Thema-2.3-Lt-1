@@ -6,38 +6,57 @@ import java.util.*;
 // Zie paragraaf 30.2 voor de thread-safe implementatie.
 public class DobbelsteenModel
 {
+	private int aantalWorpen;
 	private int waarde;
 	private ArrayList<ActionListener> actionListenerList = new ArrayList<ActionListener>();
 
 	public DobbelsteenModel()
 	{
 		waarde= (int)(Math.random()*6+1);
+		setAantalWorpen(0);
 	}
 	
     public int getWaarde()
     {
         return waarde;
     }    
+    
+	public int getAantalWorpen() {
+		return aantalWorpen;
+	}
+
+	public void setAantalWorpen(int aantalWorpen) {
+		this.aantalWorpen = aantalWorpen;
+	}
+	
+	public void verhoogAantalWorpen(){
+		int i = getAantalWorpen();
+		setAantalWorpen(i++);
+		processEvent( new ActionEvent( this, ActionEvent.ACTION_PERFORMED, null));
+	}
+	
 	public void verhoog()
 	{
 		waarde++;
 	    if (waarde>6) waarde=1;
-	    
 	    // Merk op dat we de 3e String-parameter van de constructor van de ActionEvent niet invullen.
 	    // In dit geval zou je die kunnen gebruiken om de nieuwe dobbelsteenwaarde mee te geven
 	    // aan de ActionListener. Dan hoeft de ActionListener niet met e.getSource() weer naar
 	    // het model toe te gaan.
 	    processEvent( new ActionEvent( this, ActionEvent.ACTION_PERFORMED, null));
+	    
 	} 
 	public void verlaag()
 	{
 	    waarde--;
 	    if (waarde<1) waarde=6;
 	    processEvent( new ActionEvent( this, ActionEvent.ACTION_PERFORMED, null));
+	    
 	} 
 	public void gooi(){
 	    waarde= (int)(Math.random()*6+1);
 	    processEvent( new ActionEvent( this, ActionEvent.ACTION_PERFORMED, null));
+	    
 	}
 	
 	public void addActionListener( ActionListener l){

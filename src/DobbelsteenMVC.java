@@ -3,14 +3,15 @@ import java.awt.*;
 
 public class DobbelsteenMVC extends JApplet
 {
-	DobbelsteenModel model;             //het model
-	TekstView tekstView;              // view
-	DobbelsteenView dobbelsteenView;  // view
-	DobbelsteenController controller;             // Controller
+	DobbelsteenModel model;             // het model
+	TekstView tekstView;              	// view
+	DobbelsteenView dobbelsteenView;  	// view
+	StatistiekView statView;		  	// view
+	DobbelsteenController controller;	// Controller
 	
 	public void init()
 	{
-		resize(250,200);
+		resize(250,500);
         
 		// Maak het model
 		model = new DobbelsteenModel();
@@ -27,10 +28,14 @@ public class DobbelsteenMVC extends JApplet
         tekstView = new TekstView();
         tekstView.setBackground(Color.green);
         getContentPane().add(tekstView,BorderLayout.SOUTH);
-        
+        statView = new StatistiekView();
+        statView.setBackground(Color.yellow);
+        getContentPane().add(statView,BorderLayout.SOUTH);
         // Registreer de views bij het model
         model.addActionListener(tekstView);
         model.addActionListener(dobbelsteenView);
+        model.addActionListener(statView);
+    
         
         // Eerste worp
         model.gooi();

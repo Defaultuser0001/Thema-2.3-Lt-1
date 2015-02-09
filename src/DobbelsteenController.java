@@ -24,14 +24,17 @@ public class DobbelsteenController extends JPanel implements ActionListener
         if (e.getSource() == hoger)
         {
             dob.verhoog();
+            dob.verhoogAantalWorpen();
         }  
         if (e.getSource() == lager)
         {
             dob.verlaag();
+            dob.verhoogAantalWorpen();
         } 
         if (e.getSource() == gooi)
         {
             dob.gooi();
+            dob.verhoogAantalWorpen();
         } 
 	}
 	public Dimension getPreferredSize()
